@@ -2,6 +2,8 @@ package com.example.CountryService.Controller;
 
 
 import com.example.CountryService.Country;
+import com.example.CountryService.CountryName;
+import com.example.CountryService.Service.DataService;
 import com.example.CountryService.Service.countryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,10 @@ public class countryServiceController {
     /**
      * Handle the root (/) endpoint and return a startpage
       */
-    public final countryService countryservice;
+    public final DataService dataService;
 
-    public countryServiceController(countryService countryservice) {
-        this.countryservice = countryservice;
+    public countryServiceController(DataService dataService) {
+        this.dataService = dataService;
     }
 
    // @GetMapping(uri"/countries /{names}")
@@ -31,14 +33,14 @@ public class countryServiceController {
         //return new ResponseEntity<>(countries, HttpStatus.OK);
     //}
     @GetMapping("/countries")
-    public ResponseEntity  fetchetAllcountries(){
-        //List<Country> countries = countryservice.findAllCountries();
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<List<Country>>  fetchetAllcountries(){
+        List<Country> countries = dataService.fetchCountries();
+        return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
     @GetMapping("/coutries/{name}/")
-   public ResponseEntity fetchCountryByName(@PathVariable("name") String name){
-       return new ResponseEntity(HttpStatus.OK);
+   public ResponseEntity<CountryName> fetchCountryByName(@PathVariable("name") String name){
+       return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

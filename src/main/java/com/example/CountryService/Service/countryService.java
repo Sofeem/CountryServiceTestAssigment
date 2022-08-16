@@ -9,10 +9,5 @@ import java.util.List;
 @Service
 public class countryService {
 
-    @Autowired
-    public countryService(IcountryService icountryService) {
-    }
-
-
 
 }
