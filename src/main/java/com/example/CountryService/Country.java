@@ -8,6 +8,8 @@ public class Country implements Serializable {
     public String countryName;
     public String countryCode;
     public String countryCapital;
+    public String countryPopulation;
+    public String countryFlagUrl;
 
     public Country(String countryName, String countryCode, String countryCapital, String countryPopulation, String countryFlagUrl) {
         this.countryName = countryName;
@@ -57,8 +59,7 @@ public class Country implements Serializable {
         this.countryFlagUrl = countryFlagUrl;
     }
 
-    public String countryPopulation;
-    public String countryFlagUrl;
+
 
 
 }
