@@ -8,5 +8,4 @@ public @Data class Country  {
     public String country_code;
 
 
-
 }

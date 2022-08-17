@@ -3,6 +3,7 @@ package com.example.CountryService.Controller;
 
 import com.example.CountryService.Model.Country;
 import com.example.CountryService.Service.DataService;
+import com.example.CountryService.Service.IJsonParserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,13 @@ public class countryServiceController {
       */
     @Autowired
     public final DataService dataService;
+    @Autowired
+    public final IJsonParserService jsonParserServe;
 
-    public countryServiceController(DataService dataService) {
+    public countryServiceController(DataService dataService, IJsonParserService jsonParserServe) {
         this.dataService = dataService;
+        this.jsonParserServe = jsonParserServe;
+
     }
 
    // @GetMapping(uri"/countries /{names}")
@@ -35,15 +40,18 @@ public class countryServiceController {
         //return new ResponseEntity<>(countries, HttpStatus.OK);
     //}
     @GetMapping("/countries")
-    public ResponseEntity<List<Country>>  fetchetAllcountries(){
+    public ResponseEntity<?>  fetchetAllcountries(){
         List<Country> countries = dataService.fetchCountries();
-        return new ResponseEntity<>(countries, HttpStatus.OK);
+        String cCountries = jsonParserServe.fetchCountriesJson(countries);
+
+        return new ResponseEntity<>(cCountries, HttpStatus.OK);
     }
 
     @GetMapping("/countries/{name}")
    public ResponseEntity<?> fetchCountryByName(@PathVariable("name") String name){
         List<String> countries = dataService.fetchCountriesByName(name);
-       return new ResponseEntity<>(countries,HttpStatus.OK);
+        String nCountries = jsonParserServe.fetchCountriesByNameJsom(countries);
+       return new ResponseEntity<>(nCountries,HttpStatus.OK);
     }
 
 }
