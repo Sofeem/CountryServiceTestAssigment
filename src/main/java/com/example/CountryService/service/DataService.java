@@ -1,8 +1,8 @@
-package com.example.CountryService.Service;
+package com.example.CountryService.service;
 
 
-import com.example.CountryService.Dao.IExternalApiRepository;
-import com.example.CountryService.Dto.Country;
+import com.example.CountryService.Repoexternalapi.IExternalApiRepository;
+import com.example.CountryService.model.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
@@ -21,15 +21,14 @@ public class DataService {
         this.iexternalApiRepository = iexternalApiRepository;
     }
 
-
     @Cacheable("fetchCountries")
     public List<Country> fetchCountries() {
         return iexternalApiRepository.fetchCountriesCode();
     }
 
-    public List<String> fetchCountriesByName(String name){
+   // public List<String> fetchCountriesByName(String name){
 
 
-    return iexternalApiRepository.fetchCountryInfo(name);
-    }
+   // return iexternalApiRepository.fetchCountryInfo(name);
+   // }
 }
