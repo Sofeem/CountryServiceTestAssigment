@@ -1,28 +1,35 @@
 package com.example.CountryService.Service;
 
 
+import com.example.CountryService.Dao.IExternalApiRepository;
 import com.example.CountryService.Dto.Country;
-import com.example.CountryService.Dao.ICountrieDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DataService implements IcountryService{
-    @Autowired
-    ICountrieDao countriesdao;
+public class DataService {
+
+    private final IExternalApiRepository iexternalApiRepository;
     //private RestTemplate restTemplate;
+    @Autowired
+    public DataService(@Qualifier("Api") IExternalApiRepository iexternalApiRepository){
 
-
-    public DataService(){
-
+        this.iexternalApiRepository = iexternalApiRepository;
     }
 
-    @Override
+
     @Cacheable("fetchCountries")
     public List<Country> fetchCountries() {
-        return countriesdao.fetchCountries();
+        return iexternalApiRepository.fetchCountriesCode();
+    }
+
+    public List<String> fetchCountriesByName(String name){
+
+
+    return iexternalApiRepository.fetchCountryInfo(name);
     }
 }

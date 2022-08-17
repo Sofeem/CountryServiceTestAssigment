@@ -2,7 +2,6 @@ package com.example.CountryService.Controller;
 
 
 import com.example.CountryService.Dto.Country;
-import com.example.CountryService.Dto.CountryName;
 import com.example.CountryService.Service.DataService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +36,10 @@ public class countryServiceController {
         return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
-    @GetMapping("/coutries/{name}/")
-   public ResponseEntity<CountryName> fetchCountryByName(@PathVariable("name") String name){
-       return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/countries/{name}")
+   public ResponseEntity<?> fetchCountryByName(@PathVariable("name") String name){
+        List<String> countries = dataService.fetchCountriesByName(name);
+       return new ResponseEntity<>(countries,HttpStatus.OK);
     }
 
 }
