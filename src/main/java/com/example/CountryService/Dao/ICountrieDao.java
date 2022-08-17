@@ -1,7 +1,6 @@
 package com.example.CountryService.Dao;
 
-import com.example.CountryService.Country;
-import com.example.CountryService.CountryName;
+import com.example.CountryService.Dto.Country;
 
 import java.util.List;
 

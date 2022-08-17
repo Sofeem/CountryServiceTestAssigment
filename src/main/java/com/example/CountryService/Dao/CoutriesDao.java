@@ -1,6 +1,6 @@
 package com.example.CountryService.Dao;
 
-import com.example.CountryService.Country;
+import com.example.CountryService.Dto.Country;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +17,19 @@ public class CoutriesDao implements ICountrieDao {
         List<Country> Country = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         //RestTemplate restTemplate;
-        ResponseEntity<String> responseEntity =
-                restTemplate.getForEntity("https://countriesnow.space/api/v0.1/countries/iso", String.class);
-        String rawJson = responseEntity.getBody();
+        //ResponseEntity<String> responseEntity1 =
+                //restTemplate.getForEntity("https://countriesnow.space/api/v0.1/countries/iso", String.class);
+       // String rawJson = responseEntity1.getBody();
+
+        ResponseEntity<String> responseEntity2 =
+                restTemplate.getForEntity("https://countriesnow.space/api/v0.1/countries/capital", String.class);
+        String rawJson2 = responseEntity2.getBody();
+
+        ResponseEntity<String> responseEntity3 =
+                restTemplate.getForEntity("https://countriesnow.space/api/v0.1/countries/population", String.class);
+        String rawJson = responseEntity3.getBody();
+
+
 
         JSONObject root = new JSONObject(rawJson);
         JSONArray countries = root.getJSONArray("data");

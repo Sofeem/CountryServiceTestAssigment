@@ -1,8 +1,6 @@
 package com.example.CountryService.Service;
 
-import com.example.CountryService.Country;
-import com.example.CountryService.CountryName;
-import org.springframework.stereotype.Component;
+import com.example.CountryService.Dto.Country;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

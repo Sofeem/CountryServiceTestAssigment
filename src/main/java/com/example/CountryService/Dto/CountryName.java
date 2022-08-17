@@ -1,4 +1,4 @@
-package com.example.CountryService;
+package com.example.CountryService.Dto;
 
 import lombok.Data;
 

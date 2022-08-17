@@ -1,10 +1,9 @@
 package com.example.CountryService.Controller;
 
 
-import com.example.CountryService.Country;
-import com.example.CountryService.CountryName;
+import com.example.CountryService.Dto.Country;
+import com.example.CountryService.Dto.CountryName;
 import com.example.CountryService.Service.DataService;
-import com.example.CountryService.Service.countryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
