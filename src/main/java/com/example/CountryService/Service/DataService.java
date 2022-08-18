@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DataService {
+public class DataService implements IService {
 
     private final IExternalApiRepository iexternalApiRepository;
     //private RestTemplate restTemplate;
@@ -26,9 +26,12 @@ public class DataService {
         return iexternalApiRepository.fetchCountriesCode();
     }
 
+    @Cacheable("fetchCountryInfo")
     public List<String> fetchCountriesByName(String name){
 
 
     return iexternalApiRepository.fetchCountryInfo(name);
     }
+
+
 }

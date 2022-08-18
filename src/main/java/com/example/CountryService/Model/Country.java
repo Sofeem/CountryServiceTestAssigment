@@ -4,9 +4,8 @@ import lombok.Data;
 
 public @Data class Country  {
 
-    public String countryName;
-    public String countryCode;
-
+    public String name;
+    public String country_code;
 
 
 }

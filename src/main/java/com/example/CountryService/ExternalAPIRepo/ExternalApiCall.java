@@ -43,8 +43,8 @@ public class ExternalApiCall implements IExternalApiRepository {
             String countryCode = countryNameCode.getJSONObject(i).getString("Iso2");
 
             Country count = new Country();
-            count.setCountryName(countriesName);
-            count.setCountryCode(countryCode);
+            count.setName(countriesName);
+            count.setCountry_code(countryCode);
 
             countries.add(count);
             //System.out.println("Country: " + country +"," +countryCode);
@@ -64,7 +64,7 @@ public class ExternalApiCall implements IExternalApiRepository {
 
         //String info =
 
-        return Stream.of(name, cCode, cPopulation, cCapital,cFlagFileUrl)
+        return Stream.of(name, cCode,cCapital, cPopulation, cFlagFileUrl)
                 .collect(Collectors.toList());
     }
 
