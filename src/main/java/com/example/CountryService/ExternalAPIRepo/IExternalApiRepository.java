@@ -1,6 +1,7 @@
 package com.example.CountryService.ExternalAPIRepo;
 
 import com.example.CountryService.Model.Country;
+import com.example.CountryService.Model.CountryInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface IExternalApiRepository {
 
     List <Country> fetchCountriesCode();
 
-    List<String> fetchCountryInfo(String name);
+   CountryInfo fetchCountryInfo(String name);
 
 
 }

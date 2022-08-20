@@ -2,6 +2,7 @@ package com.example.CountryService.Controller;
 
 
 import com.example.CountryService.Model.Country;
+import com.example.CountryService.Model.CountryInfo;
 import com.example.CountryService.Service.DataService;
 import com.example.CountryService.Service.IJsonParserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,9 @@ public class countryServiceController {
 
     @GetMapping("/countries/{name}")
    public ResponseEntity<?> fetchCountryByName(@PathVariable("name") String name){
-        List<String> countries = dataService.fetchCountriesByName(name);
-        String nCountries = jsonParserServe.fetchCountriesByNameJsom(countries);
-       return new ResponseEntity<>(nCountries,HttpStatus.OK);
+        CountryInfo countries = dataService.fetchCountriesByName(name);
+        //String nCountries = jsonParserServe.fetchCountriesByNameJsom(countries);
+       return new ResponseEntity<>(countries,HttpStatus.OK);
     }
 
 }

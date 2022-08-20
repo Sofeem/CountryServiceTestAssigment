@@ -3,6 +3,7 @@ package com.example.CountryService.Service;
 
 import com.example.CountryService.ExternalAPIRepo.IExternalApiRepository;
 import com.example.CountryService.Model.Country;
+import com.example.CountryService.Model.CountryInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
@@ -27,7 +28,7 @@ public class DataService implements IService {
     }
 
     @Cacheable("fetchCountryInfo")
-    public List<String> fetchCountriesByName(String name){
+    public CountryInfo fetchCountriesByName(String name){
 
 
     return iexternalApiRepository.fetchCountryInfo(name);

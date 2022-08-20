@@ -1,6 +1,7 @@
 package com.example.CountryService.ExternalAPIRepo;
 
 import com.example.CountryService.Model.Country;
+import com.example.CountryService.Model.CountryInfo;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -55,17 +56,14 @@ public class ExternalApiCall implements IExternalApiRepository {
     }
 
     @Override
-    public List<String> fetchCountryInfo(String name) {
+    public CountryInfo fetchCountryInfo(String name) {
 
          String cCode = getCode(name);
          String cPopulation = getPopulation(name);
          String cCapital = getCapital(name);
          String cFlagFileUrl = getFlagFileUrl(name);
 
-        //String info =
-
-        return Stream.of(name, cCode,cCapital, cPopulation, cFlagFileUrl)
-                .collect(Collectors.toList());
+        return new CountryInfo(name,cCode,cCapital,cPopulation,cFlagFileUrl);
     }
 
     public String getCode(String name){
