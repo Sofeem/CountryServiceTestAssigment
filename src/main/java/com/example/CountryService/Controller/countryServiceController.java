@@ -8,16 +8,14 @@ import com.example.CountryService.Service.IJsonParserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/")
 public class countryServiceController {
 
 
@@ -27,11 +25,11 @@ public class countryServiceController {
     @Autowired
     public final DataService dataService;
     @Autowired
-    public final IJsonParserService jsonParserServe;
+    //public final IJsonParserService jsonParserServe;
 
-    public countryServiceController(DataService dataService, IJsonParserService jsonParserServe) {
+    public countryServiceController(DataService dataService) {
         this.dataService = dataService;
-        this.jsonParserServe = jsonParserServe;
+        //this.jsonParserServe = jsonParserServe;
 
     }
 
@@ -41,18 +39,16 @@ public class countryServiceController {
         //return new ResponseEntity<>(countries, HttpStatus.OK);
     //}
     @GetMapping("/countries")
-    public ResponseEntity<?>  fetchetAllcountries(){
-        List<Country> countries = dataService.fetchCountries();
-        String cCountries = jsonParserServe.fetchCountriesJson(countries);
+    public @ResponseBody  List<Country> fetchetAllcountries(){
+        /* String cCountries = jsonParserServe.fetchCountriesJson(countries); */
 
-        return new ResponseEntity<>(cCountries, HttpStatus.OK);
+        return dataService.fetchCountries();
     }
 
     @GetMapping("/countries/{name}")
-   public ResponseEntity<?> fetchCountryByName(@PathVariable("name") String name){
-        CountryInfo countries = dataService.fetchCountriesByName(name);
+   public @ResponseBody CountryInfo fetchCountryByName(@PathVariable("name") String name){
         //String nCountries = jsonParserServe.fetchCountriesByNameJsom(countries);
-       return new ResponseEntity<>(countries,HttpStatus.OK);
+       return dataService.fetchCountriesByName(name);
     }
 
 }
