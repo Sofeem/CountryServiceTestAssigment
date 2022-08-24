@@ -18,32 +18,43 @@ import java.util.List;
 @RequestMapping("/")
 public class countryServiceController {
 
-
     /**
-     * Handle the root (/) endpoint and return a startpage
-      */
+     * The controller for COUNTRY SERVICES ENDPOINTS AND WEBUI
+     * <p>this class handles the api endpoints operations for the country service applications, via rest controllers
+     * </p>
+     * <p>this class also serves HTML based web application, for UI interactions with country services</p>
+     */
     @Autowired
     public final DataService dataService;
-    @Autowired
-    //public final IJsonParserService jsonParserServe;
 
+
+
+    @Autowired
     public countryServiceController(DataService dataService) {
         this.dataService = dataService;
-        //this.jsonParserServe = jsonParserServe;
-
     }
 
-   // @GetMapping(uri"/countries /{names}")
-    //public ResponseEntity<List<Country>> getAllAppointments(){
-       // List<Country> countries = countryservice.findAllAppointments();
-        //return new ResponseEntity<>(countries, HttpStatus.OK);
-    //}
+    /**
+     *Get an instance of list of countries codes object,
+     *
+     * Return one of the following code:
+     * 200: Status Ok
+     * 404: Not found
+     * @return the response from the dataservice
+     */
     @GetMapping("/countries")
-    public @ResponseBody  List<Country> fetchetAllcountries(){
-        /* String cCountries = jsonParserServe.fetchCountriesJson(countries); */
-
+    public @ResponseBody  List<Country> fetchetAllCountries(){
         return dataService.fetchCountries();
     }
+
+    /**
+     *Get an instance of country information object,
+     *
+     * Return one of the following code:
+     * 200: Status Ok
+     * 404: Not found
+     * @return the response from the dataservice
+     */
 
     @GetMapping("/countries/{name}")
    public @ResponseBody CountryInfo fetchCountryByName(@PathVariable("name") String name){

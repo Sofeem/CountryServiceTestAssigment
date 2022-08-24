@@ -11,8 +11,12 @@ import reactor.util.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+/**
+ * The service act as repository for other service to provide the data.
+ * <p>this class handles the external api request operations for accessing the country information, via api
+ * </p>
+ */
 
 @Repository("Api")
 public class ExternalApiCall implements IExternalApiRepository {
@@ -23,6 +27,14 @@ public class ExternalApiCall implements IExternalApiRepository {
     String population;
     String capital;
     String flagfileurl;
+
+
+    /**
+     * Get a list of country codes object  from external api call
+     *
+     * @return String response (list of Objects: country codes)
+     */
+
 
     @Override
     public List<Country> fetchCountriesCode() {
@@ -54,6 +66,12 @@ public class ExternalApiCall implements IExternalApiRepository {
         }
         return countries;
     }
+    /**
+     * Get a country Information object provided the country name for external api call
+     *
+     * @params (country name)
+     * @return String response (Object country Information)
+     */
 
     @Override
     public CountryInfo fetchCountryInfo(String name) {
@@ -66,12 +84,29 @@ public class ExternalApiCall implements IExternalApiRepository {
         return new CountryInfo(name,cCode,cCapital,cPopulation,cFlagFileUrl);
     }
 
+
+
+    /**
+     * Get a country code provided the country name for external api call
+     *
+     * @params (country name)
+     * @return String response (Iso2 code)
+     */
+
     public String getCode(String name){
 
         String rawJsonCode = getApiResponseBody("https://countriesnow.space/api/v0.1/countries/iso");
         code = getApiCallServiceString(rawJsonCode, name,"Iso2","name");
         return code;
     }
+
+
+    /**
+     * Get a country capital provided the country name for external api call
+     *
+     * @params (country name)
+     * @return String response (capital)
+     */
 
 
     public String getCapital(String countryName){
@@ -86,7 +121,12 @@ public class ExternalApiCall implements IExternalApiRepository {
         return flagfileurl;
     }
 
-
+    /**
+     * Get a population provided the country name for external api call
+     *
+     * @params (country name)
+     * @return String response (population)
+     */
 
    public String getPopulation(String countryName){
 
@@ -95,7 +135,9 @@ public class ExternalApiCall implements IExternalApiRepository {
 
        String rawJson = responseEntity.getBody();
        JSONObject result = getApiCallServiceJson(rawJson,countryName,"country");
-       JSONArray populationCounts = result.getJSONArray("populationCounts");
+
+       JSONArray populationCounts;
+       populationCounts = result.getJSONArray("populationCounts");
 
        for(int j = 0; j<populationCounts.length();j++ ) {
            JSONObject obj = (JSONObject) populationCounts.get(j);
@@ -110,6 +152,13 @@ public class ExternalApiCall implements IExternalApiRepository {
        }
    return population;
     }
+
+    /**
+     * Get an json object response for external api call
+     *
+     * @params (body, name. collector)
+     * @return String response (capital, code, flag url)
+     */
 
     public String getApiCallServiceString(String body, String name, String accessor, String collector) {
 
@@ -127,6 +176,13 @@ public class ExternalApiCall implements IExternalApiRepository {
         return r;
     }
 
+    /**
+     * Get an json object response for external api call
+     *
+     * @params (body, name. collector)
+     * @return String response (capital, code, flag url)
+     */
+
     public JSONObject getApiCallServiceJson(String body, String name, String collector) {
 
         JSONObject r = null;
@@ -142,6 +198,13 @@ public class ExternalApiCall implements IExternalApiRepository {
         }
         return r;
     }
+
+    /**
+     * Get an response for external api call
+     *
+     * @param uri
+     * @return String response (capital, code, flag url)
+     */
 
     public String getApiResponseBody(String uri){
         RestTemplate restTemplate = new RestTemplate();

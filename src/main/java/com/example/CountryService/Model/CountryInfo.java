@@ -13,5 +13,10 @@ public @Data class CountryInfo {
 
 
     public CountryInfo(String name, String cCode, String cCapital, String cPopulation, String cFlagFileUrl) {
+        this.name = name;
+        this.country_code = cCode;
+        this.capital = cCapital;
+        this.population = cPopulation;
+        this.flag_img_uri = cFlagFileUrl;
     }
 }
