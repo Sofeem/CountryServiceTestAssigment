@@ -23,10 +23,10 @@ mvn spring-boot:run
 
 END points:
 countries codes:
-http://localhost:8080/countries/Finland
+http://localhost:8081/countries/Finland
 
 country information:
-http://localhost:8080/countries
+http://localhost:8081/countries
 
 
 
