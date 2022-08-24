@@ -58,9 +58,6 @@ public class apiControllerTest {
                         .andExpect(jsonPath("$", hasSize(1)))
                         .andExpect(jsonPath("$[0].name", is(cCodes.getName())));
 
-
-        //Country returnedAuthor = result.getResponse().getContentAsString(), Country.class;
-
     }
 
     @Test
